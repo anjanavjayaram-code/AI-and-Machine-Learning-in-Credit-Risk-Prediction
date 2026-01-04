@@ -1,113 +1,107 @@
-# Data Sources Documentation
+Data Sources Documentation
+Overview
 
-## Overview
+This project uses a publicly available consumer credit dataset derived from LendingClub loan data to evaluate and compare traditional statistical models and machine learning techniques for credit risk prediction.
 
-This project uses a **single publicly available dataset** for consumer credit risk modelling.  
-The dataset contains anonymised borrower-level and loan-level information and is widely used in academic research and applied machine learning studies on credit risk prediction.
+The dataset is used exclusively for academic and research purposes and supports transparency, reproducibility, and ethical compliance.
 
-All data used in this project are **secondary, anonymised, and publicly accessible**, ensuring transparency, reproducibility, and compliance with ethical research standards.
+Dataset Description
 
----
+Dataset name: LendingClub Consumer Loan Dataset
 
-## Primary Dataset
+Observational unit: Individual consumer loan
 
-### LendingClub Consumer Loan Dataset
+Target variable: Loan default (binary outcome)
 
-- **Source**: LendingClub (via Kaggle)
-- **Access Link**:  
-  https://www.kaggle.com/datasets/wordsforthewise/lending-club
-- **Data Type**: Structured tabular data
-- **File Used**: `lendingclub.csv`
-- **Observations**: 5,000 loans
-- **Variables**: 11 original variables + 1 derived target variable
-- **Time Coverage**: Multiple loan origination years (as provided in the public dataset)
-- **Geographical Scope**: United States consumer lending market
+Sample size: 5,000 loan observations (subset used for analysis)
 
-LendingClub is a peer-to-peer lending platform that publicly releases anonymised loan-level data for research and transparency purposes. The dataset includes borrower financial characteristics, loan attributes, and repayment outcomes.
+Data type: Structured tabular data
 
----
+Each record represents a borrower’s loan application and repayment outcome, including financial, credit history, and loan-specific attributes.
 
-## Target Variable Construction
+Data Source and Origin
 
-The original dataset contains a categorical loan status variable:
+The dataset is sourced from LendingClub, a US-based peer-to-peer lending platform, and is commonly used in academic research and data science benchmarking studies.
 
-- `loan_status`
+Original source: LendingClub public loan data
 
-For the purpose of credit risk modelling, a **binary default indicator** was constructed:
+Distribution platform: Kaggle (public data repository)
 
-- Loans labelled as **“Charged Off”** or **“Default”** were classified as **default events (1)**
-- Loans labelled as **“Fully Paid”** were classified as **non-default events (0)**
+Access type: Open-access, publicly available
 
-This transformation is consistent with industry-standard probability-of-default (PD) modelling practices and prior academic research.
+The dataset has been widely used in peer-reviewed studies examining credit risk modelling and machine learning performance in consumer lending contexts.
 
----
+Nature of the Data
 
-## Variables Used in the Analysis
+The data is real-world historical loan data, not simulated.
 
-The project uses a subset of economically meaningful variables commonly applied in consumer credit risk modelling:
+All borrower information has been anonymised prior to public release.
 
-### Loan Characteristics
-- `loan_amnt` – Loan amount issued
-- `term` – Loan term (36 or 60 months)
-- `int_rate` – Interest rate applied to the loan
+No personally identifiable information (PII) is included.
 
-### Borrower Financial Information
-- `annual_inc` – Annual income
-- `dti` – Debt-to-income ratio
-- `emp_length` – Employment length
+The dataset contains no direct protected attributes (e.g. race, religion).
 
-### Credit History Indicators
-- `fico_score` – Borrower credit score
-- `open_acc` – Number of open credit accounts
-- `credit_utilization` – Credit utilisation ratio
-- `delinq_2yrs` – Number of delinquencies in the past two years
+Key Variables Used
 
-These variables were selected based on:
-- Prior academic literature
-- Industry credit scoring practices
-- Economic interpretability and regulatory relevance
+The analysis uses a subset of variables commonly applied in credit risk modelling, including:
 
----
+Loan characteristics (e.g. loan amount, term, interest rate)
 
-## Data Quality and Preprocessing
+Borrower financial attributes (e.g. income, debt-to-income ratio)
 
-- The dataset used in this project contains **no missing values** in the selected variables.
-- Numerical variables were standardised using **z-score normalisation**.
-- Categorical variables (`term`, `emp_length`) were encoded using **one-hot encoding**.
-- No synthetic data generation or external data enrichment was applied.
-- The original class imbalance in default outcomes was preserved to reflect real-world credit portfolios.
+Credit history indicators (e.g. FICO score, delinquencies)
 
----
+Loan outcome status (used to derive default label)
 
-## Ethical and Legal Considerations
+A full variable description and preprocessing rationale are documented in the project notebook.
 
-- All data are **fully anonymised** and contain **no personally identifiable information (PII)**.
-- The dataset is publicly available and intended for research and educational use.
-- The project complies with data protection principles and aligns with GDPR requirements regarding transparency and accountability in automated decision-making.
-- No protected attributes (e.g., race, gender, religion) are included in the dataset.
+Default Definition
 
----
+Default is defined in line with industry practice:
 
-## Limitations of the Data
+Loans with status “Charged Off” or “Default” are classified as default events.
 
-- The dataset represents a **public, simplified subset** of LendingClub loan data and may not fully reflect proprietary banking datasets.
-- The absence of explicit demographic variables limits the scope of fairness and bias assessment.
-- The data reflect historical lending conditions and may not capture real-time or dynamic borrower behaviour.
+Loans marked “Fully Paid” are classified as non-default.
 
-These limitations are acknowledged and considered in the interpretation of analytical results.
+This binary classification aligns with probability-of-default (PD) modelling conventions used in consumer credit risk analysis.
 
----
+Licensing and Usage Rights
 
-## Reproducibility
+The dataset is distributed under Kaggle’s data usage terms.
 
-All data preprocessing, feature engineering, and modelling steps are fully documented in the project’s Jupyter Notebooks.  
-Using the provided dataset and code, the analysis can be independently replicated.
+Use is permitted for educational and research purposes.
 
----
+The dataset is not redistributed or modified for commercial use within this project.
 
-## Citation
+Users intending to reuse the data should consult the original Kaggle dataset page for the most up-to-date licensing conditions.
 
-If using this dataset or reproducing the analysis, please cite:
+Ethical Considerations
 
-LendingClub (via Kaggle). *LendingClub Loan Dataset*.  
-https://www.kaggle.com/datasets/wordsforthewise/lending-club
+Ethical considerations have been explicitly addressed:
+
+All data are publicly available and anonymised
+
+No automated credit decisions are made based on this analysis
+
+The project complies with principles of responsible data use, transparency, and accountability
+
+Results are interpreted cautiously to avoid misleading or discriminatory conclusions
+
+The dataset does not contain explicit demographic variables, which limits fairness analysis but also reduces the risk of direct discriminatory modelling.
+
+Reproducibility
+
+The dataset is stored locally in the data/ directory to ensure:
+
+Full reproducibility of results
+
+Consistency between reported findings and underlying data
+
+Transparency for academic review and validation
+
+All preprocessing, feature selection, and modelling steps are documented in the accompanying Jupyter Notebook.
+
+Disclaimer
+
+This dataset and analysis are used solely for academic research.
+The results are not intended for real-world credit decision-making without further validation, governance controls, and regulatory approval.
